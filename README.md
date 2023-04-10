@@ -41,3 +41,4 @@ WebMvcConfig에서 CORS를 위해 추가한 파일이라고 알아주시면 될 
 
 
 아뇽 아뇽
+kill soon
