@@ -14,25 +14,30 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
+allprojects {
+	repositories {
+		mavenCentral()
+	}
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok' //TODO: annotation build 활성화 언급하기
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.5'
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'com.h2database:h2'
+	group = 'com.cnu'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '17'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+	dependencies {
+		// lombok
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok' //TODO: annotation build 활성화 언급하기
 
-tasks.named('test') {
-	useJUnitPlatform()
+		// test
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+	}
 }

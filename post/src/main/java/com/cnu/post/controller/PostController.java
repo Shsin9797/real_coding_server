@@ -1,8 +1,9 @@
-package com.cnu.real_coding_server.controller;
+package com.cnu.post.controller;
 
+import com.cnu.post.model.response.PostResponse;
 import com.cnu.real_coding_server.entity.Post;
 import com.cnu.real_coding_server.model.request.PostRequest;
-import com.cnu.real_coding_server.service.PostService;
+import com.cnu.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPost(@PathVariable("postId") Integer postId) {
+    public ResponseEntity<PostResponse> getPost(@PathVariable("postId") Integer postId) {
         return ResponseEntity.ok(postService.getPost(postId).orElse(null));
     }
 
